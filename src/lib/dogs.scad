@@ -1,11 +1,11 @@
 $fn=100;
 
 
-//dogblock = [20,20,10];
+dogblock = [20,20,10];
 //dog(dogblock, type="small");
-//dog(dogblock, type="large");
+dog(dogblock, type="large", hole=true);
 //cornerdog(dogblock, type="small");
-//cornerdog(dogblock, type="large");
+//cornerdog(dogblock, type="large", hole=true);
 //handle(dogblock[2], "small");
 //handle(dogblock[2], "large");
 //pressureplate(dogblock[2]);
@@ -18,7 +18,7 @@ $fn=100;
 //spiralhandle();
 
 //turnkey (dogblock[2]*2, "small");
-//turnkey (dogblock[2]*2, "large");
+//turnkey (dogblock[2]*2, "large", true);
 
 
 module spiralhandle() {
@@ -123,13 +123,19 @@ module turnkeyspiral (h, type, maxd, mind) {
     }
 }
 
-module turnkey (h, type) {
+module turnkey (h, type, hole) {
     keywidth = 4.96; //choose value, slightly smaller than before; 5
     keylength = 19.4; //choose 19 in stead of useless calculation. 19 chosen to make sure previously printed spirals still work (previous calculated value was 19.6
-    translate([0,-dogdiameter(type)/2,0]) dogcyl(h,type);
-    translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
-    rotate([0,0,90]) translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
-   
+    difference() {
+        union() {
+            translate([0,-dogdiameter(type)/2,0]) dogcyl(h,type);
+            translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
+            rotate([0,0,90]) translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
+        }
+        if (hole) {
+            translate([0,-dogdiameter(type)/2,0]) dogcyl(h,type);
+        }
+    }
 }
 
 module pressureplate(h) {
@@ -145,29 +151,39 @@ module pressureplate(h) {
 
 
 //dog with 90 degree corner section
-module cornerdog(s, type) {
+module cornerdog(s, type, hole) {
+    d = dogdiameter (type);
     difference() {
         union() {
             half=[s[0]/2,s[1],s[2]];
             translate([-3,0,0]) finnedblock(s);
             translate([0,-s[1]+3,0]) rotate([0,0,90]) finnedblock(s);
             rotate([0,0,45]) translate([-half[0]/2,0,0]) finnedblock(half);
-            d = dogdiameter (type);
             translate([-d/2,0,0]) dogcyl(s[2],type);
             
         }
         cylinder(s[2],2,2);
         translate([0,0,s[2]]) sphere(r=2);
+        if (hole) {
+            translate([-d/2,0,0]) dogcylhole(s[2],type);            
+        }
     }
 }
 
 
 //complete dog with finned block and dogcylinder
-module dog(s, type) {
-    finnedblock(s);
-    translate([s[0]/2,0]) {
-        dogcyl(s[2], type);
-    }    
+module dog(s, type, hole) {
+    
+    difference() {
+        union() {
+            finnedblock(s);
+            translate([s[0]/2,0]) {
+                dogcyl(s[2], type);
+            }
+        }
+        if(hole)
+            translate([s[0]/2,0]) dogcylhole(s[2], type);
+    }
 }
 
 //finned block to save some material when printing
@@ -199,6 +215,21 @@ module dogcyl(h, type) {
     cylheight   = h + dogheight(type);
     translate([0,cyldiameter/2,0]) 
         cylinder(h=cylheight,d=cyldiameter);
+}
+
+//to create a through hole for the screw
+//4mm hole all the way through and wider at the top so the screw fits through
+module dogcylhole(h, type) {
+    cyldiameter = 4; //(m4 screws of the bed)
+    cylheight = h + dogheight(type) + dogblock[2];
+    sh=4+3; //size of screwhead
+    translate([0,dogdiameter(type)/2,0]) {
+        cylinder(h=cylheight,d=cyldiameter);
+        //sphereradius for "dome" to make it printable without supports
+        sr = sh/2; 
+        cylinder(h=dogblock[2]-sr,d=sh);
+        translate([0,0,h-sr]) sphere(d=sh);
+    }
 }
 
 
