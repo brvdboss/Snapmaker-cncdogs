@@ -1,10 +1,13 @@
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/cornerdoglarge.stl src/cornerdoglarge.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/cornerdogsmall.stl src/cornerdogsmall.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/doglarge.stl src/doglarge.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/dogsmall.stl src/dogsmall.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/spiralhandle.stl src/spiralhandle.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeylarge.stl src/turnkeylarge.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeysmall.stl src/turnkeysmall.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeyspiral-20_10.stl src/turnkeyspiral-20_10.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeyspiral-40_15.stl src/turnkeyspiral-40_15.scad
-"C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeyspiral-60_30.stl src/turnkeyspiral-60_30.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/cornerdoglarge.stl src/cornerdoglarge.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/cornerdoglarge-hole.stl src/cornerdoglarge-hole.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/cornerdogsmall.stl src/cornerdogsmall.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/doglarge.stl src/doglarge.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/doglarge-hole.stl src/doglarge-hole.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/dogsmall.stl src/dogsmall.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/spiralhandle.stl src/spiralhandle.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeylarge.stl src/turnkeylarge.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeylarge-hole.stl src/turnkeylarge-hole.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeysmall.stl src/turnkeysmall.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeyspiral-20_10.stl src/turnkeyspiral-20_10.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeyspiral-40_15.stl src/turnkeyspiral-40_15.scad
+start /B "" "C:\Program Files\OpenSCAD\openscad.exe" -o stl/turnkeyspiral-60_30.stl src/turnkeyspiral-60_30.scad
