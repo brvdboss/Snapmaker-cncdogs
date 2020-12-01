@@ -1,3 +1,3 @@
 include <lib/dogs.scad>
 
-cornerdog(dogblock, type="large");
+cornerdog(dogblock, type="large", hole=false);
