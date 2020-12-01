@@ -89,16 +89,24 @@ module pressurespiral2(h, mind, maxd) {
     cyld = 1;
     travel = maxd-mind;
     degrees = 360;
-    steps = 30; //deliberately not too much steps to provide enough friction
+    //we calculate the #of steps so the friction area is approximately 2mm
+    //shortcut: calculate circumference of circle and then the # of steps
+    //needed to have an arc of 2mm.
+    circ = maxd*PI; //we use largest diameter
+    steps = circ/2; //2mm of arc length flat for friction
+    echo(steps);
     stepinc = degrees/steps;
     steptravel = travel/(steps*stepinc);
 
+    //we go from the outside to the inside to make sure we reach the
+    //furthest point, the smallest ones are unusuable anyway, so better to err on that side
     points=[
-        for(i = [0:stepinc:degrees])
+        for(i = [degrees:-stepinc:0])
             [
                 (mind+i*steptravel) * cos(i),
                 (mind+i*steptravel) * sin(i)
-            ]
+            ],
+            [mind,0] // add the last point manually, purely cosmetic
     ];
     
     //add the hull as the space it fills up anyway, and the extra volume
