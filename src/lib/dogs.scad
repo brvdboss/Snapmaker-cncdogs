@@ -94,7 +94,6 @@ module pressurespiral2(h, mind, maxd) {
     //needed to have an arc of 2mm.
     circ = maxd*PI; //we use largest diameter
     steps = circ/2; //2mm of arc length flat for friction
-    echo(steps);
     stepinc = degrees/steps;
     steptravel = travel/(steps*stepinc);
 
