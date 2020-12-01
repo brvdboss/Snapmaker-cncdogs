@@ -116,24 +116,19 @@ module pressurespiral2(h, mind, maxd) {
 
 
 module turnkeyspiral (h, type, maxd, mind) {
-    
-    keywidth = 5;
-    keylength = 2*mind;
     difference() {
         pressurespiral2(h, mind, maxd);
         // scale it one percent so the key will certainly fit
-        scale([1.01,1.01,1.01]) turnkey (h, type); 
+        scale([1.02,1.02,1.02]) turnkey (h, type); 
     }
 }
 
 module turnkey (h, type) {
-    maxd = 2*dogdiameter("large")*0.99; // slightly reduce to make sure it fits the plate well
-    mind = maxd - 10;
-    keywidth = 5;
-    keylength = 2*mind;
-        translate([0,-dogdiameter(type)/2,0]) dogcyl(h,type);
-        translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
-        rotate([0,0,90]) translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
+    keywidth = 4.96; //choose value, slightly smaller than before; 5
+    keylength = 19.4; //choose 19 in stead of useless calculation. 19 chosen to make sure previously printed spirals still work (previous calculated value was 19.6
+    translate([0,-dogdiameter(type)/2,0]) dogcyl(h,type);
+    translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
+    rotate([0,0,90]) translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
    
 }
 
