@@ -3,7 +3,7 @@ $fn=100;
 
 dogblock = [20,20,10];
 //dog(dogblock, type="small");
-dog(dogblock, type="large", hole=true);
+//dog(dogblock, type="large", hole=true);
 //cornerdog(dogblock, type="small");
 //cornerdog(dogblock, type="large", hole=true);
 //handle(dogblock[2], "small");
@@ -18,8 +18,8 @@ dog(dogblock, type="large", hole=true);
 //spiralhandle();
 
 //turnkey (dogblock[2]*2, "small");
-//turnkey (dogblock[2]*2, "large", true);
-
+//turnkey (dogblock[2]*2, "large", hole=true);
+//dogcylhole(dogblock[2]*2,"large");
 
 module spiralhandle() {
     height=5;
@@ -133,7 +133,7 @@ module turnkey (h, type, hole) {
             rotate([0,0,90]) translate([-keylength/2,-keywidth/2,0]) cube([keylength,keywidth,h]);
         }
         if (hole) {
-            translate([0,-dogdiameter(type)/2,0]) dogcyl(h,type);
+            translate([0,-dogdiameter(type)/2,0]) dogcylhole(h,type);
         }
     }
 }
@@ -221,13 +221,13 @@ module dogcyl(h, type) {
 //4mm hole all the way through and wider at the top so the screw fits through
 module dogcylhole(h, type) {
     cyldiameter = 4; //(m4 screws of the bed)
-    cylheight = h + dogheight(type) + dogblock[2];
+    cylheight = h + dogheight(type);
     sh=4+3; //size of screwhead
     translate([0,dogdiameter(type)/2,0]) {
         cylinder(h=cylheight,d=cyldiameter);
         //sphereradius for "dome" to make it printable without supports
         sr = sh/2; 
-        cylinder(h=dogblock[2]-sr,d=sh);
+        cylinder(h=cylheight-sr-dogheight(type),d=sh);
         translate([0,0,h-sr]) sphere(d=sh);
     }
 }
