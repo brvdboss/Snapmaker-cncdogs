@@ -1,7 +1,7 @@
 $fn=100;
 
 
-dogblock = [20,20,10];
+//dogblock = [20,20,10];
 //dog(dogblock, type="small");
 //dog(dogblock, type="large");
 //cornerdog(dogblock, type="small");
@@ -197,17 +197,8 @@ module dogcyl(h, type) {
     //OpenScad doesn't have real variables, so we can assign oonly once
     cyldiameter = dogdiameter(type);
     cylheight   = h + dogheight(type);
-    cylminidiameter
-                = dogminidiameter(type);
-    cylminiheight
-                = dogminiheight(type);
-    
-    translate([0,cyldiameter/2,0]) {
+    translate([0,cyldiameter/2,0]) 
         cylinder(h=cylheight,d=cyldiameter);
-        translate([0,0,cylheight]) {
-            cylinder(h=cylminiheight,d=cylminidiameter);
-        }
-    }
 }
 
 
@@ -215,16 +206,11 @@ module dogcyl(h, type) {
 //depth and diameter of large holes
 largedepth = 3.75;
 largediameter = 10.00;
-//and the minipart
-largeminidepth = 2.50;
-largeminidiameter = 3.00;
 
 //depth and diameter of small holes
 smalldepth = 3.85;
 smalldiameter = 8.00;
-//amd the minipart
-smallminidepth=1.50;
-smallminidiameter=2.40;
+
 
 //OpenScad doesn't have real variables, so we can assign oonly once
 //So we define some conenience functions to get the value we need for
@@ -235,12 +221,4 @@ function dogdiameter (type) =   type=="large" ? largediameter :
                                 0;
 function dogheight (type)   =   type=="large" ? largedepth : 
                                 type=="small" ? smalldepth :
-                                0;
-function dogminidiameter (type)
-                            =   type=="large" ? largeminidiameter : 
-                                type=="small" ? smallminidiameter :
-                                0;
-function dogminiheight (type)
-                            =   type=="large" ? largeminidepth : 
-                                type=="small" ? smallminidepth :
                                 0;
