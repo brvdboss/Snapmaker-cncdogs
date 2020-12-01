@@ -29,7 +29,7 @@ module spiralhandle() {
             translate([55,0,0]) cylinder(height,d=15);
         }
         // scale it one percent so the key will certainly fit
-        rotate([0,0,45]) scale([1.01,1.01,1.01]) turnkey(height, "large"); 
+        rotate([0,0,45]) scale([1.02,1.02,1.02]) turnkey(height, "large"); 
     }
     
 }
